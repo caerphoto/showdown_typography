@@ -4,7 +4,7 @@
 //
 
 (function () {
-    var typography = function (converter) {
+    var typography = function () {
         return [
             {
                 type: "lang",
@@ -38,7 +38,7 @@
                         function (match, code) {
                             i += 1;
                             fCodeblocks[i] = "```" + code + "```";
-                            return "{gfm-js-fcb-" + i + "}";
+                            return "{typog-fcb-" + i + "}";
                         });
 
                     // Extract indented code blocks.
@@ -47,7 +47,7 @@
                         function (match, code) {
                             i += 1;
                             nCodeblocks[i] = "    " + code;
-                            return "{gfm-js-ncb-" + i + "}";
+                            return "{typog-ncb-" + i + "}";
                         });
 
                     // Extract inline code blocks
@@ -55,10 +55,35 @@
                     text = text.replace(/`(.+)`/g, function (match, code) {
                             i += 1;
                             iCodeblocks[i] = "`" + code + "`";
-                            return "{gfm-js-icb-" + i + "}";
+                            return "{typog-icb-" + i + "}";
                         });
 
                     // Perform typographic symbol replacement.
+
+                    // Double quotes
+                    text = text.
+                        // Opening quotes
+                        replace(/"([\w'])/g, "“$1").
+                        // All the rest
+                        replace(/"/g, "”");
+
+                    // Single quotes/apostrophes
+                    text = text.
+                        // Apostrophes first
+                        replace(/\b'\b/g, "’").
+                        // Opening quotes
+                        replace(/'\b/g, "‘").
+                        // All the rest
+                        replace(/'/g, "’");
+
+                    // Dashes
+                    text = text
+                        // Don't replace lines containing only hyphens
+                        .replace(/^-+$/gm, "{typog-hr}")
+                        .replace(/---/g, "—") // em dash
+                        .replace(/--/g, "–")  // en dash
+                        .replace(/{typog-hr}/g, "----");
+
                     for (i = 0, l = subs.length; i < l; i += 1) {
                         arr = subs[i];
                         re = new RegExp(arr[0], 'g');
@@ -71,17 +96,17 @@
 
 
                     // Restore fenced code blocks.
-                    text = text.replace(/{gfm-js-fcb-([0-9]+)}/g, function (x, y) {
+                    text = text.replace(/{typog-fcb-([0-9]+)}/g, function (x, y) {
                         return  fCodeblocks[y];
                     });
 
                     // Restore indented code blocks.
-                    text = text.replace(/{gfm-js-ncb-([0-9]+)}/g, function (x, y) {
+                    text = text.replace(/{typog-ncb-([0-9]+)}/g, function (x, y) {
                         return  nCodeblocks[y];
                     });
 
                     // Restore inline code blocks.
-                    text = text.replace(/{gfm-js-icb-([0-9]+)}/g, function (x, y) {
+                    text = text.replace(/{typog-icb-([0-9]+)}/g, function (x, y) {
                         return iCodeblocks[y];
                     });
 
@@ -92,8 +117,12 @@
     };
 
     // Client-side export
-    if (typeof window !== 'undefined' && window.Showdown && window.Showdown.extensions) { window.Showdown.extensions.typography = typography; }
+    if (typeof window !== 'undefined' && window.Showdown && window.Showdown.extensions) {
+        window.Showdown.extensions.typography = typography;
+    }
     // Server-side export
-    if (typeof module !== 'undefined') module.exports = typography;
+    if (typeof module !== 'undefined') {
+        module.exports = typography;
+    }
 }());
 
