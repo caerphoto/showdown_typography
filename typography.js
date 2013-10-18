@@ -21,17 +21,7 @@
                             hellip: '\u2026'
                         },
 
-                        subs = [
-                            ['\\.\\.\\.', e.hellip],
-                            ["(^|[\\s\"])'", '$1' + e.lsquo],
-                            ['(^|[\\s-])"', '$1' + e.ldquo],
-                            ['---', e.emdash],
-                            ['--', e.endash],
-                            ["'($|[\\s\"])?", e.rsquo + '$1'],
-                            ['"($|[\\s.,;:?!])', e.rdquo + '$1']
-                        ],
-                        i, l,
-                        arr, re, sub;
+                        i;
 
                     // Extract fenced code blocks.
                     i = -1;
@@ -64,36 +54,29 @@
                     // Double quotes
                     text = text.
                         // Opening quotes
-                        replace(/"([\w'])/g, "“$1").
+                        replace(/"([\w'])/g, e.ldquo + "$1").
                         // All the rest
-                        replace(/"/g, "”");
+                        replace(/"/g, e.rdquo);
 
                     // Single quotes/apostrophes
                     text = text.
                         // Apostrophes first
-                        replace(/\b'\b/g, "’").
+                        replace(/\b'\b/g, e.rsquo).
                         // Opening quotes
-                        replace(/'\b/g, "‘").
+                        replace(/'\b/g, e.lsquo).
                         // All the rest
-                        replace(/'/g, "’");
+                        replace(/'/g, e.rsquo);
 
                     // Dashes
                     text = text
                         // Don't replace lines containing only hyphens
                         .replace(/^-+$/gm, "{typog-hr}")
-                        .replace(/---/g, "—") // em dash
-                        .replace(/--/g, "–")  // en dash
+                        .replace(/---/g, e.emdash)
+                        .replace(/--/g, e.endash)
                         .replace(/{typog-hr}/g, "----");
 
-                    for (i = 0, l = subs.length; i < l; i += 1) {
-                        arr = subs[i];
-                        re = new RegExp(arr[0], 'g');
-                        sub = arr[1];
-                        text = text.replace(re, sub);
-                    }
-
                     // Ellipses.
-                    text = text.replace(/\.{3}/g, "&hellip;");
+                    text = text.replace(/\.{3}/g, e.hellip);
 
 
                     // Restore fenced code blocks.
