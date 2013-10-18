@@ -3,6 +3,8 @@
 This file adds “curly quotes”, en– and em— dashes and ellipses… to the Showdown
 JavaScript Markdown converter.
 
+The converter is based on the regexes I developed for my [Soda](http://soda.heroku.com/) document editor.
+
 ## Important!
 
 The converter operates on the Markdown text, not the resulting HTML, so it
