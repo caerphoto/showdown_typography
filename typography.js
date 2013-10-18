@@ -51,7 +51,9 @@
 
                     // Perform typographic symbol replacement.
 
-                    // Double quotes
+                    // Double quotes. There might be a reason this doesn't use
+                    // the same \b matching style as the single quotes, but I
+                    // can't remember what it is :(
                     text = text.
                         // Opening quotes
                         replace(/"([\w'])/g, e.ldquo + "$1").
