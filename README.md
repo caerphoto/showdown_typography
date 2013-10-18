@@ -21,4 +21,7 @@ There are a few of limitations that are not trivial to solve:
 
 I'm honestly not sure how to work around these. The `'69` thing could possibly be fixed using a rule like `/'(\d{2}\b)/`, but that would then be wrong for actual quotes that start with a 2-digit number, e.g. `87 years ago our fathers brought forth on this continent…`.
 
+The `'twas` case could be handled with some specific rules for those types of
+words.
+
 Similarly, The second issue might be worked around using `/(\d+)'/` and `/(\d+)"/` but again, for quotes that end in numbers the result would be wrong. You could argue that quotes should end in commas or periods, but there are "over 9000" examples to the contrary.

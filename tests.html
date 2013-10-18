@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Typographic Character Replacement Tests</title>
+    <style>
+      body {
+        margin: 1em auto;
+        max-width: 35em;
+        font: 21px/1.5 Georgia, serif;
+        color: #333;
+        background: #f4f4f4;
+      }
+
+      textarea {
+        font: inherit;
+        -webkit-appearance: none;
+      }
+
+      #input, #output {
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid #ccc;
+        min-height: 10em;
+        padding: 0.5em;
+      }
+
+      #output {
+        white-space: pre-wrap;
+        color: #777;
+      }
+    </style>
+
+
+  </head>
+  <body>
+    <h1>Typographic Character Replacement Tests</h1>
+    <textarea id="input">"This is a quote, with an 'inner quote'."
+And here's a "quote ending in a period."
+It also works ("with brackets") and @"anything that's not a 'word character'"@.
+
+Some... ellipses -- and an en dash, and---em dashes.
+
+Problem: 'single outer quotes with "double inner"' doesn't work right if the last two quotes are adjacent. Can 'be fixed if you "add punctuation".'</textarea>
+
+    <div id="output"></div>
+
+    <script>
+      // Mock Showdown object.
+      window.Showdown = {};
+      window.Showdown.extensions = {};
+    </script>
+
+    <script src="typography.js"></script>
+
+    <script>
+      var input = document.getElementById("input"),
+        output = document.getElementById("output"),
+
+        converter = window.Showdown.extensions.typography()[0].filter,
+        updateOutput;
+
+      updateOutput = function () {
+        output.innerHTML = converter(input.value);
+      };
+
+      window.addEventListener("input", function (evt) {
+        if (evt.target !== input) {
+          return;
+        }
+
+        updateOutput();
+      });
+
+      updateOutput();
+      input.focus();
+    </script>
+  </body>
+</html>
+
