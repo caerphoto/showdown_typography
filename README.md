@@ -1,4 +1,4 @@
-# showdown_typography [![Build Status](https://travis-ci.org/yangpro/showdown_typography.png?branch=master)](https://travis-ci.org/yangpro/showdown_typography)
+# showdown_typography [![Build Status](https://secure.travis-ci.org/yangpro/showdown_typography.png?branch=master)](https://travis-ci.org/yangpro/showdown_typography)
 
 A Showdown extension that adds “curly quotes”, en– and em— dashes and ellipses… to the Showdown JavaScript Markdown converter.
 
