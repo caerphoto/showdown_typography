@@ -4,8 +4,8 @@ A Showdown extension that adds “curly quotes”, en– and em— dashes and el
 
 This library forked from [https://github.com/caerphoto/showdown_typography](https://github.com/caerphoto/showdown_typography)
 
-- Fix renderer messes with embedded HTML
-- Support multilingual(unicode)
+- Fix renderer messes with embedded HTML.
+- Support multilingual(unicode).
 
 You can also see a live demo [here](http://yangpro.github.io/showdown_typography/).
 
