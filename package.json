@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git://github.com/yangpro/showdown_typography.git"
   },
+  "scripts": {
+    "test": "grunt --verbose"
+  },
   "keywords": [],
   "license": "MIT",
   "readmeFilename": "README.md",
