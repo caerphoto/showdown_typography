@@ -5,7 +5,7 @@
   "description": "A Showdown extension that adds “curly quotes”, en– and em— dashes and ellipses… to the Showdown JavaScript Markdown converter.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/yangpro/showdown_typography.git"
+    "url": "git://github.com/@caerphoto/showdown_typography.git"
   },
   "scripts": {
     "test": "grunt --verbose"
