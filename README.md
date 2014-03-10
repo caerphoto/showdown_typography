@@ -1,8 +1,6 @@
-# showdown_typography [![Build Status](https://secure.travis-ci.org/yangpro/showdown_typography.png?branch=master)](https://travis-ci.org/yangpro/showdown_typography)
+# Typography Showdown Extension [![Build Status](https://secure.travis-ci.org/caerphoto/showdown_typography.png?branch=master)](https://travis-ci.org/caerphoto/showdown_typography)
 
 A Showdown extension that adds “curly quotes”, en– and em— dashes and ellipses… to the Showdown JavaScript Markdown converter.
-
-This library forked from [https://github.com/caerphoto/showdown_typography](https://github.com/caerphoto/showdown_typography)
 
 - Fix renderer messes with embedded HTML.
 - Support multilingual(unicode).
