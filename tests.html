@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Typographic Character Replacement Tests</title>
@@ -34,17 +34,13 @@
   </head>
   <body>
     <h1>Typographic Character Replacement Tests</h1>
-    <textarea id="input">"Double outer quotes with 'single inner'"
-"Double outer quotes with <a href='#' class="double quotes" title="It's cool!">html</a>"
-'Single outer quotes with "double inner"'
-'Single outer quotes with <a href="#" class='single quotes' title='I say "Yes!"'>html</a>'
-
+    <textarea id="input">"This is a quote, with an 'inner quote'."
 And here's a "quote ending in a period."
 It also works ("with brackets") and @"anything that's not a 'word character'"@.
 
 Some... ellipses -- and an en dash, and---em dashes.
 
-Support multilingual(Unicode): "여기서 말하는 '이것'은 무엇일까요?"</textarea>
+Problem: 'single outer quotes with "double inner"' doesn't work right if the last two quotes are adjacent. Can 'be fixed if you "add punctuation".'</textarea>
 
     <div id="output"></div>
 
@@ -54,7 +50,7 @@ Support multilingual(Unicode): "여기서 말하는 '이것'은 무엇일까요?
       window.Showdown.extensions = {};
     </script>
 
-    <script src="./../dist/typography.js"></script>
+    <script src="typography.js"></script>
 
     <script>
       var input = document.getElementById("input"),
