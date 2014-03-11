@@ -51,23 +51,24 @@
 
                     // Perform typographic symbol replacement.
 
-                    // Double quotes. There might be a reason this doesn't use
-                    // the same \b matching style as the single quotes, but I
-                    // can't remember what it is :(
+                    // Fix renderer messes with embedded HTML
+                    // Support multilingual(unicode)
+
+                    // Double quotes.
                     text = text.
                         // Opening quotes
-                        replace(/"([\w'])/g, e.ldquo + "$1").
+                        replace(/"([\u00BF-\u1FFF\u2C00-\uD7FF\w])(?=[^>]*(<|$))/g, e.ldquo + "$1").
                         // All the rest
-                        replace(/"/g, e.rdquo);
+                        replace(/"(?=[^>]*(<|$))/g, e.rdquo);
 
                     // Single quotes/apostrophes
                     text = text.
                         // Apostrophes first
-                        replace(/\b'\b/g, e.rsquo).
+                        replace(/([\u00BF-\u1FFF\u2C00-\uD7FF\w])'([\u00BF-\u1FFF\u2C00-\uD7FF\w])/g, "$1" + e.rsquo + "$2").
                         // Opening quotes
-                        replace(/'\b/g, e.lsquo).
+                        replace(/'([\u00BF-\u1FFF\u2C00-\uD7FF\w])(?=[^>]*(<|$))/g, e.lsquo + "$1").
                         // All the rest
-                        replace(/'/g, e.rsquo);
+                        replace(/'(?=[^>]*(<|$))/g, e.rsquo);
 
                     // Dashes
                     text = text
