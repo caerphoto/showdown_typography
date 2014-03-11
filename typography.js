@@ -12,7 +12,7 @@
                 filter: function (text) {
                     var fCodeblocks = {}, nCodeblocks = {}, iCodeblocks = {},
                         e = {
-                            endash: '\u2013',
+                            endash: '\u2009\u2013\u2009', // U+2009 = thin space
                             emdash: '\u2014',
                             lsquo:  '\u2018',
                             rsquo:  '\u2019',
@@ -70,12 +70,12 @@
                         replace(/'/g, e.rsquo);
 
                     // Dashes
-                    text = text
+                    text = text.
                         // Don't replace lines containing only hyphens
-                        .replace(/^-+$/gm, "{typog-hr}")
-                        .replace(/---/g, e.emdash)
-                        .replace(/--/g, e.endash)
-                        .replace(/{typog-hr}/g, "----");
+                        replace(/^-+$/gm, "{typog-hr}").
+                        replace(/---/g, e.emdash).
+                        replace(/ -- /g, e.endash).
+                        replace(/{typog-hr}/g, "----");
 
                     // Ellipses.
                     text = text.replace(/\.{3}/g, e.hellip);
